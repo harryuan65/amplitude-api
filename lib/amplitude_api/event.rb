@@ -43,6 +43,9 @@ class AmplitudeAPI
     #   @return [ String ] type of revenue. (Note: you must send a price and quantity with this field)
     attr_accessor :revenue_type
 
+    attr_accessor :location_lat
+    attr_accessor :location_lng
+
     # Create a new Event
     #
     # @param [ String ] user_id a user_id to associate with the event
@@ -65,6 +68,8 @@ class AmplitudeAPI
       self.time = getopt(attributes, :time)
       self.ip = getopt(attributes, :ip, '')
       self.insert_id = getopt(attributes, :insert_id)
+      self.location_lat = getopt(attributes, :location_lat)
+      self.location_lng = getopt(attributes, :location_lng)
       validate_revenue_arguments(attributes)
     end
 
@@ -96,6 +101,8 @@ class AmplitudeAPI
       serialized_event[:time] = formatted_time if time
       serialized_event[:ip] = ip if ip
       serialized_event[:insert_id] = insert_id if insert_id
+      serialized_event[:location_lng] = location_lng if location_lng
+      serialized_event[:location_lat] = location_lat if location_lat
       serialized_event
     end
 
