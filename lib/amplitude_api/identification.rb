@@ -11,14 +11,17 @@ class AmplitudeAPI
     #   @return [ String ] the user_properties to be attached to the Amplitude Identify
     attr_accessor :user_properties
 
+    attr_accessor :platform
+
     # Create a new Identification
     #
     # @param [ String ] user_id a user_id to associate with the identification
     # @param [ String ] device_id a device_id to associate with the identification
     # @param [ Hash ] user_properties various properties to attach to the user identification
-    def initialize(user_id: '', device_id: nil, user_properties: {})
+    def initialize(user_id: '', device_id: nil, platform: nil, user_properties: {})
       self.user_id = user_id
       self.device_id = device_id if device_id
+      self.platform = platform if platform
       self.user_properties = user_properties
     end
 
@@ -38,7 +41,10 @@ class AmplitudeAPI
       {
         user_id: user_id,
         user_properties: user_properties
-      }.tap { |hsh| hsh[:device_id] = device_id if device_id }
+      }.tap { |hsh|
+        hsh[:device_id] = device_id if device_id
+        hsh[:platform] = platform if platform
+      }
     end
 
     # @return [ true, false ]
