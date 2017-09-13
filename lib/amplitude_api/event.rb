@@ -45,6 +45,7 @@ class AmplitudeAPI
 
     attr_accessor :location_lat
     attr_accessor :location_lng
+    attr_accessor :platform
 
     # Create a new Event
     #
@@ -70,6 +71,7 @@ class AmplitudeAPI
       self.insert_id = getopt(attributes, :insert_id)
       self.location_lat = getopt(attributes, :location_lat)
       self.location_lng = getopt(attributes, :location_lng)
+      self.platform = getopt(attributes, :platform)
       validate_revenue_arguments(attributes)
     end
 
@@ -103,6 +105,7 @@ class AmplitudeAPI
       serialized_event[:insert_id] = insert_id if insert_id
       serialized_event[:location_lng] = location_lng if location_lng
       serialized_event[:location_lat] = location_lat if location_lat
+      serialized_event[:platform] = platform if platform
       serialized_event
     end
 
